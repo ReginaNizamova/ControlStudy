@@ -1,0 +1,51 @@
+﻿<Page x:Class="Authorization.AuthorizationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Authorization"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Авторизация">
+    <Page.Resources>
+        <Style TargetType="Label" x:Key="heading">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="Label" x:Key="text">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="textBox">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Background" Value="Azure"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="LightBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Вход" Margin="20" Style="{StaticResource heading}" />
+
+        <Viewbox Stretch="Uniform" Grid.Column="1" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" MaxWidth="350" Margin="25">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <Label Content="Логин"   Style="{StaticResource text}"/>
+                    <Label Content="Пароль"   Margin="0 20"  Style="{StaticResource text}"/>
+                </StackPanel>
+
+                <StackPanel Width="150">
+                    <TextBox  Style="{StaticResource textBox}" x:Name="LoginText"/>
+                    <TextBox Margin="0 30" Style="{StaticResource textBox}" x:Name="PasswordText"/>
+                </StackPanel>
+            </StackPanel>
+        </Viewbox>
+        <Button Background="Transparent" Content="Войти" FontSize="18" FontWeight="Bold" Grid.Column="1" Height="30" HorizontalAlignment="Center" Margin="50 0 0 100" VerticalAlignment="Bottom" Width="150" Click="InputAuthorization_Click"/>
+    </Grid>
+</Page>
+

@@ -1,0 +1,220 @@
+﻿<Page x:Class="Authorization.RegistrationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Authorization"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Регистрация">
+    
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="heading">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="Label" x:Key="text">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="textBox">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Background" Value="Azure"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="textBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="DarkGray"/>
+        </Style>
+        <Style TargetType="DatePicker" x:Key="datePicker">
+            <Setter Property="Text" Value="Дата рождения"/>
+            <Setter Property="Foreground" Value="DarkGray"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.8*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Viewbox Grid.RowSpan="2">
+            <StackPanel >
+                <Button Background="Transparent" Content="Регистрация" Margin="20" Style="{StaticResource heading}" x:Name="labelRegistr" BorderThickness="0" Click="Registration_Click"/>
+                <Button Background="Transparent" BorderThickness="0" Content="Вход" FontSize="30" FontWeight="Bold" Foreground="Wheat" Margin="0 0 100 0"  x:Name="MainButtonInput" Click="Input_Click" Grid.Row="1" VerticalAlignment="Top"/>
+            </StackPanel>
+        </Viewbox>
+
+        <Viewbox Stretch="Uniform" Grid.ColumnSpan="3" Grid.RowSpan="3"  Margin="250 50 50 50" MaxHeight="450">
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel  Width="150" x:Name="textStackPanel" Margin="0 0 50 0">
+                    <Canvas Margin="0 0 0 30">
+                        <TextBox  x:Name="FamilyText" Style="{StaticResource textBox}" Width="150" />
+                        <TextBlock IsHitTestVisible="False" Text="Фамилия" Foreground="DarkGray" FontSize="18">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=FamilyText}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Canvas>
+
+                    <Canvas Margin="0 30 0 30">
+                        <TextBox x:Name="NameText"  Style="{StaticResource textBox}" Width="150" />
+
+                        <TextBlock IsHitTestVisible="False" Text="Имя" Foreground="DarkGray" FontSize="18">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=NameText}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Canvas>
+
+                    <Canvas Margin="0 30 0 30">
+                        <TextBox x:Name="PatronimicText"  Style="{StaticResource textBox}" Width="150"/>
+
+                        <TextBlock IsHitTestVisible="False" Text="Отчество" Foreground="DarkGray" FontSize="18">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=PatronimicText}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Canvas>
+                    
+                    <DatePicker  x:Name="BirthdayText"  Margin="0 30 0 30" FirstDayOfWeek="Monday" Text="Дата рождения" Width="150" Background="Azure" FontSize="14" Style="{StaticResource datePicker}"/>
+
+                    <Canvas Margin="0 0 0 30">
+                        <ComboBox x:Name="ComboBoxGender" Width="150" Height="25" Padding="0">
+                            <TextBlock Text="Женский" FontSize="18"/>
+                            <TextBlock Text="Мужской" FontSize="18"/>
+                        </ComboBox>
+                        <TextBlock IsHitTestVisible="False" Text="Пол" Foreground="DarkGray" FontSize="18">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=ComboBoxGender}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Canvas>
+                </StackPanel>
+
+                <StackPanel Width="150" x:Name="textStackPanel2" >
+                    <Canvas Margin="0 0 0 30">
+                        <TextBox x:Name="EmailText"  Style="{StaticResource textBox}" Width="150"/>
+
+                        <TextBlock IsHitTestVisible="False" Text="Email" Foreground="DarkGray" FontSize="18">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=EmailText}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Canvas>
+
+                    <Canvas Margin="0 30 0 30">
+                        <ComboBox x:Name="ComboBoxGroup" Width="150"  Height="25" Padding="0">
+                            <TextBlock Text="101" FontSize="18"/>
+                            <TextBlock Text="201" FontSize="18"/>
+                            <TextBlock Text="301" FontSize="18"/>
+                            <TextBlock Text="401" FontSize="18"/>
+                            <TextBlock Text="501" FontSize="18"/>
+                        </ComboBox>
+
+                        <TextBlock IsHitTestVisible="False" Text="Группа" Foreground="DarkGray" FontSize="18">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=ComboBoxGroup}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Canvas>
+
+                    <Canvas Margin="0 30 0 30">
+                        <ComboBox x:Name="ComboBoxRole" Width="150" Height="25" Padding="0">
+                            <TextBlock Text="Студент" FontSize="18"/>
+                            <TextBlock Text="Преподаватель" FontSize="18"/>
+                            <TextBlock Text="Администратор" FontSize="18"/>
+                        </ComboBox>
+                        <TextBlock IsHitTestVisible="False" Text="Должность" Foreground="DarkGray" FontSize="18">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=ComboBoxRole}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Canvas>
+
+                    <Canvas Margin="0 30 0 30">
+                        <TextBox x:Name="LoginText"  Style="{StaticResource textBox}" Width="150"/>
+                        <TextBlock IsHitTestVisible="False" Text="Логин" Foreground="DarkGray" FontSize="18">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=LoginText}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Canvas>
+
+                    <Canvas Margin="0 30 0 30">
+                        <PasswordBox PasswordChar="~"  x:Name="PasswordPersonText" Width="150" FontSize="18" Background="Azure" PasswordChanged="PasswordPersonText_PasswordChanged">
+                            <PasswordBox.ToolTip>
+                                <TextBlock>
+                                     Буквы только латинского алфавита <LineBreak/> Не менее 8 символов <LineBreak/> Заглавные буквы <LineBreak/> Строчные буквы <LineBreak/> Цифры <LineBreak/> Любые символы кроме пароля
+                                </TextBlock>
+                            </PasswordBox.ToolTip>
+                        </PasswordBox>
+                        <TextBlock x:Name="passwordText" Style="{StaticResource textBlock}" Text="Пароль"/>
+                    </Canvas>
+                </StackPanel>
+            </StackPanel>
+        </Viewbox>
+    </Grid>
+</Page>

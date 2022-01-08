@@ -1,0 +1,480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище AuthorizationnModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Discipline">
+          <Key>
+            <PropertyRef Name="CodeDiscipline" />
+          </Key>
+          <Property Name="CodeDiscipline" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Discipline" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="CodeGroup" />
+          </Key>
+          <Property Name="CodeGroup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Group" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="CodePerson" />
+          </Key>
+          <Property Name="CodePerson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Family" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Patronimic" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CodeGroup" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Progress">
+          <Key>
+            <PropertyRef Name="CodeProgress" />
+          </Key>
+          <Property Name="CodeProgress" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodePerson" Type="int" Nullable="false" />
+          <Property Name="CodeDiscipline" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="int" Nullable="false" />
+          <Property Name="DateGrade" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="CodeRole" />
+          </Key>
+          <Property Name="CodeRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="CodeSession" />
+          </Key>
+          <Property Name="CodeSession" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodePerson" Type="int" Nullable="false" />
+          <Property Name="DateSession" Type="datetime" Nullable="false" />
+          <Property Name="Time" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="CodePerson" />
+          </Key>
+          <Property Name="CodePerson" Type="int" Nullable="false" />
+          <Property Name="LoginUser" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CodeRole" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Discipline_Progress">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Progress" Type="Self.Progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="CodeDiscipline" />
+            </Principal>
+            <Dependent Role="Progress">
+              <PropertyRef Name="CodeDiscipline" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="CodeGroup" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="CodeGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Progress">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Progress" Type="Self.Progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="CodePerson" />
+            </Principal>
+            <Dependent Role="Progress">
+              <PropertyRef Name="CodePerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="CodeRole" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="CodeRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Session_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="CodePerson" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="CodePerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="CodePerson" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="CodePerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AuthorizationnModelContainer">
+          <EntitySet Name="Discipline" EntityType="Self.Discipline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Progress" EntityType="Self.Progress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Discipline_Progress" Association="Self.FK_Discipline_Progress">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="Progress" EntitySet="Progress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group" Association="Self.FK_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Progress" Association="Self.FK_Person_Progress">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Progress" EntitySet="Progress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles" Association="Self.FK_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Session_Person" Association="Self.FK_Session_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users" Association="Self.FK_Users">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AuthorizationnModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AuthorizationnEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Disciplines" EntityType="AuthorizationnModel.Discipline" />
+          <EntitySet Name="Groups" EntityType="AuthorizationnModel.Group" />
+          <EntitySet Name="People" EntityType="AuthorizationnModel.Person" />
+          <EntitySet Name="Progresses" EntityType="AuthorizationnModel.Progress" />
+          <EntitySet Name="Roles" EntityType="AuthorizationnModel.Role" />
+          <EntitySet Name="Users" EntityType="AuthorizationnModel.User" />
+          <AssociationSet Name="FK_Discipline_Progress" Association="AuthorizationnModel.FK_Discipline_Progress">
+            <End Role="Discipline" EntitySet="Disciplines" />
+            <End Role="Progress" EntitySet="Progresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group" Association="AuthorizationnModel.FK_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Progress" Association="AuthorizationnModel.FK_Person_Progress">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Progress" EntitySet="Progresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users" Association="AuthorizationnModel.FK_Users">
+            <End Role="Person" EntitySet="People" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles" Association="AuthorizationnModel.FK_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Sessions" EntityType="AuthorizationnModel.Session" />
+          <AssociationSet Name="FK_Session_Person" Association="AuthorizationnModel.FK_Session_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Discipline">
+          <Key>
+            <PropertyRef Name="CodeDiscipline" />
+          </Key>
+          <Property Name="CodeDiscipline" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Discipline1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Progresses" Relationship="AuthorizationnModel.FK_Discipline_Progress" FromRole="Discipline" ToRole="Progress" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="CodeGroup" />
+          </Key>
+          <Property Name="CodeGroup" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group1" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="People" Relationship="AuthorizationnModel.FK_Group" FromRole="Group" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="CodePerson" />
+          </Key>
+          <Property Name="CodePerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Family" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Patronimic" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CodeGroup" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="AuthorizationnModel.FK_Group" FromRole="Person" ToRole="Group" />
+          <NavigationProperty Name="Progresses" Relationship="AuthorizationnModel.FK_Person_Progress" FromRole="Person" ToRole="Progress" />
+          <NavigationProperty Name="User" Relationship="AuthorizationnModel.FK_Users" FromRole="Person" ToRole="User" />
+          <NavigationProperty Name="Sessions" Relationship="AuthorizationnModel.FK_Session_Person" FromRole="Person" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Progress">
+          <Key>
+            <PropertyRef Name="CodeProgress" />
+          </Key>
+          <Property Name="CodeProgress" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodePerson" Type="Int32" Nullable="false" />
+          <Property Name="CodeDiscipline" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="Int32" Nullable="false" />
+          <Property Name="DateGrade" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Discipline" Relationship="AuthorizationnModel.FK_Discipline_Progress" FromRole="Progress" ToRole="Discipline" />
+          <NavigationProperty Name="Person" Relationship="AuthorizationnModel.FK_Person_Progress" FromRole="Progress" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="CodeRole" />
+          </Key>
+          <Property Name="CodeRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="AuthorizationnModel.FK_Roles" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="CodePerson" />
+          </Key>
+          <Property Name="CodePerson" Type="Int32" Nullable="false" />
+          <Property Name="LoginUser" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CodeRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="AuthorizationnModel.FK_Users" FromRole="User" ToRole="Person" />
+          <NavigationProperty Name="Role" Relationship="AuthorizationnModel.FK_Roles" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Discipline_Progress">
+          <End Type="AuthorizationnModel.Discipline" Role="Discipline" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AuthorizationnModel.Progress" Role="Progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="CodeDiscipline" />
+            </Principal>
+            <Dependent Role="Progress">
+              <PropertyRef Name="CodeDiscipline" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group">
+          <End Type="AuthorizationnModel.Group" Role="Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AuthorizationnModel.Person" Role="Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="CodeGroup" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="CodeGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Progress">
+          <End Type="AuthorizationnModel.Person" Role="Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AuthorizationnModel.Progress" Role="Progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="CodePerson" />
+            </Principal>
+            <Dependent Role="Progress">
+              <PropertyRef Name="CodePerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users">
+          <End Type="AuthorizationnModel.Person" Role="Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AuthorizationnModel.User" Role="User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="CodePerson" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CodePerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles">
+          <End Type="AuthorizationnModel.Role" Role="Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AuthorizationnModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="CodeRole" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CodeRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="CodeSession" />
+          </Key>
+          <Property Name="CodeSession" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodePerson" Type="Int32" Nullable="false" />
+          <Property Name="DateSession" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Time" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Person" Relationship="AuthorizationnModel.FK_Session_Person" FromRole="Session" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Session_Person">
+          <End Type="AuthorizationnModel.Person" Role="Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AuthorizationnModel.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="CodePerson" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="CodePerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AuthorizationnModelContainer" CdmEntityContainer="AuthorizationnEntities">
+          <EntitySetMapping Name="Disciplines">
+            <EntityTypeMapping TypeName="AuthorizationnModel.Discipline">
+              <MappingFragment StoreEntitySet="Discipline">
+                <ScalarProperty Name="Discipline1" ColumnName="Discipline" />
+                <ScalarProperty Name="CodeDiscipline" ColumnName="CodeDiscipline" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="AuthorizationnModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Group1" ColumnName="Group" />
+                <ScalarProperty Name="CodeGroup" ColumnName="CodeGroup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="AuthorizationnModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="CodeGroup" ColumnName="CodeGroup" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Patronimic" ColumnName="Patronimic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Family" ColumnName="Family" />
+                <ScalarProperty Name="CodePerson" ColumnName="CodePerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Progresses">
+            <EntityTypeMapping TypeName="AuthorizationnModel.Progress">
+              <MappingFragment StoreEntitySet="Progress">
+                <ScalarProperty Name="DateGrade" ColumnName="DateGrade" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="CodeDiscipline" ColumnName="CodeDiscipline" />
+                <ScalarProperty Name="CodePerson" ColumnName="CodePerson" />
+                <ScalarProperty Name="CodeProgress" ColumnName="CodeProgress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="AuthorizationnModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Role1" ColumnName="Role" />
+                <ScalarProperty Name="CodeRole" ColumnName="CodeRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="AuthorizationnModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="CodeRole" ColumnName="CodeRole" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="CodePerson" ColumnName="CodePerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="AuthorizationnModel.Session">
+              <MappingFragment StoreEntitySet="Session">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="DateSession" ColumnName="DateSession" />
+                <ScalarProperty Name="CodePerson" ColumnName="CodePerson" />
+                <ScalarProperty Name="CodeSession" ColumnName="CodeSession" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
