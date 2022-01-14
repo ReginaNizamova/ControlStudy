@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Authorization"
         mc:Ignorable="d"
         Title="Регистрация" Height="450" Width="800" MinHeight="450" MinWidth="800">
     
@@ -39,9 +40,9 @@
 
         <Image x:Name="BackImage" Grid.ColumnSpan="3" Stretch="UniformToFill"/>
 
-        <Frame ContentRendered="Frame_ContentRendered" x:Name="frame" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden"/>
+        <Frame ContentRendered="FrameContentRendered" x:Name="frame" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden"/>
 
-        <Button Background="Transparent" BorderThickness="0" Height="35" VerticalAlignment="Top" Margin="5 0 0  0" Name="buttonBack" HorizontalAlignment="Left" Width="35" Click="ButtonBack_Click" >
+        <Button Background="Transparent" BorderThickness="0" Height="35" VerticalAlignment="Top" Margin="5 0 0  0" Name="buttonBack" HorizontalAlignment="Left" Width="35" Click="ButtonBackClick" >
             <Button.ToolTip>
                 <ToolTip>
                     <TextBlock Text="Назад"/>

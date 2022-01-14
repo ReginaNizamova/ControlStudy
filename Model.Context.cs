@@ -13,27 +13,26 @@ namespace Authorization
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
+    
     public partial class ControlStudyEntities : DbContext
     {
+        private static ControlStudyEntities _context;
         public ControlStudyEntities()
             : base("name=ControlStudyEntities")
         {
         }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-
-        private static ControlStudyEntities _context;
-
+  
         public static ControlStudyEntities GetContext()
         {
             if (_context == null)
                 _context = new ControlStudyEntities();
             return _context;
         }
-
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+    
         public virtual DbSet<Discipline> Disciplines { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Person> People { get; set; }

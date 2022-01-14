@@ -41,13 +41,7 @@
             <StackPanel  Orientation="Vertical" >
 
                 <Canvas Margin="0 0 0 70">
-                    <ComboBox x:Name="comboBoxGroup" Width="170" Height="30" SelectionChanged ="Selector_OnSelectionChanged" FontSize="18">
-                        <ComboBoxItem Content="101" FontSize="18"/>
-                        <ComboBoxItem Content="201" FontSize="18"/>
-                        <ComboBoxItem Content="301" FontSize="18"/>
-                        <ComboBoxItem Content="401" FontSize="18"/>
-                        <ComboBoxItem Content="501" FontSize="18"/>
-                    </ComboBox>
+                    <ComboBox DisplayMemberPath="Group" x:Name="comboBoxGroup" Width="170" Height="30" SelectionChanged ="SelectorOnSelectionChanged" FontSize="18"/>
                     <TextBlock IsHitTestVisible="False" Text="Группа" Foreground="DarkGray" FontSize="18">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
@@ -80,13 +74,7 @@
                 </Canvas>
 
                 <Canvas Margin="0 0 0 70">
-                    <ComboBox x:Name="textDiscipline" FontSize="18" Width="170" Height="30">
-                        <ComboBoxItem Content="Математика" FontSize="18"/>
-                        <ComboBoxItem Content="Английский язык" FontSize="18"/>
-                        <ComboBoxItem Content="Французский язык" FontSize="18"/>
-                        <ComboBoxItem Content="Экономика" FontSize="18"/>
-                        <ComboBoxItem Content="Философия" FontSize="18"/>
-                    </ComboBox>
+                    <ComboBox x:Name="textDiscipline" FontSize="18" Width="170" Height="30"/>
                     <TextBlock IsHitTestVisible="False" Text="Дисциплина" Foreground="DarkGray" FontSize="18">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
@@ -117,10 +105,10 @@
                     </TextBlock>
                 </Canvas>
 
-                <Button x:Name="addData" Height="30" Content="Добавить" Width="170" FontSize="18" Click="AddData_Click"/>
-                <Button x:Name="deleteData" Height="30" Content="Удалить" Width="170" FontSize="18" Click="DeleteData_Click" Margin="0 10 0 0"/>
+                <Button x:Name="addData" Height="30" Content="Добавить" Width="170" FontSize="18" Click="AddDataClick"/>
+                <Button x:Name="deleteData" Height="30" Content="Удалить" Width="170" FontSize="18" Click="DeleteDataClick" Margin="0 10 0 0"/>
             </StackPanel>
         </Viewbox>
-        <TextBox BorderThickness="0" Width="0" Height="0" Background="Transparent" Foreground="Transparent" x:Name="IdStudent"/>
+        <TextBox BorderThickness="0" Width="0" Height="0" Background="Transparent" Foreground="Transparent" x:Name="idStudent"/>
     </Grid>
 </Page>

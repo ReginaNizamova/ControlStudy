@@ -37,14 +37,14 @@
             <StackPanel Orientation="Vertical">
                 <StackPanel Width="150">
                     <Canvas  Margin="0 0 0 30">
-                        <TextBox  Style="{StaticResource textBox}" x:Name="LoginText" Width="150"/>
+                        <TextBox  Style="{StaticResource textBox}" x:Name="loginText" Width="150"/>
 
                         <TextBlock IsHitTestVisible="False" Text="Логин" Foreground="DarkGray" FontSize="18">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=LoginText}" Value="">
+                                        <DataTrigger Binding="{Binding Text, ElementName=loginText}" Value="">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -54,11 +54,11 @@
                     </Canvas>
 
                     <Canvas Margin="0 30 0 30">
-                        <PasswordBox PasswordChar="~"  x:Name="PasswordPersonText" Width="150" FontSize="18" Background="Azure" PasswordChanged="PasswordPersonText_PasswordChanged"/>
+                        <PasswordBox PasswordChar="~"  x:Name="passwordPersonText" Width="150" FontSize="18" Background="Azure" PasswordChanged="PasswordPersonTextPasswordChanged"/>
                         <TextBlock x:Name="passwordText" Style="{StaticResource textBlock}" Text="Пароль"/>
                     </Canvas>
                 </StackPanel>
-                <Button Margin="0 30 0 0" Background="Transparent" Content="Войти" FontSize="18" FontWeight="Bold"  Click="InputAuthorization_Click"/>
+                <Button Margin="0 30 0 0" Background="Transparent" Content="Войти" FontSize="18" FontWeight="Bold"  Click="InputAuthorizationClick"/>
             </StackPanel>
         </Viewbox>
     </Grid>

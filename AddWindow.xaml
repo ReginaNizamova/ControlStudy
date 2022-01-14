@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Authorization"
         mc:Ignorable="d"
-        Title="AddWindow" Height="300" Width="500" Background="BlueViolet">
+        Title="Добавить пользователя" IsVisibleChanged="WindowIsVisibleChanged" Height="300" Width="500" Background="#031745">
     <Grid>
 
         <Viewbox Stretch="Uniform"  MaxHeight="230">
             <StackPanel Orientation="Horizontal" >
                 <StackPanel  Width="150" x:Name="textStackPanel" Margin="0 0 50 0">
                     <Canvas Margin="0 0 0 30">
-                        <TextBox  x:Name="FamilyText" Text="{Binding Family}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150" />
+                        <TextBox  x:Name="familyText" Text="{Binding Person.Family}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150" />
 
                         <TextBlock IsHitTestVisible="False" Text="фамилия" FontFamily="Comic Sans MS" Foreground="DarkGray" FontSize="16">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=FamilyText}" Value="">
+                                        <DataTrigger Binding="{Binding Text, ElementName=familyText}" Value="">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -29,14 +29,14 @@
                     </Canvas>
 
                     <Canvas Margin="0 30 0 30">
-                        <TextBox x:Name="NameText" FontFamily="Comic Sans MS" Text="{Binding Name}" Style="{StaticResource textBox}" Width="150" />
+                        <TextBox x:Name="nameText" FontFamily="Comic Sans MS" Text="{Binding Person.Name}" Style="{StaticResource textBox}" Width="150" />
 
                         <TextBlock IsHitTestVisible="False" FontFamily="Comic Sans MS" Text="имя" Foreground="DarkGray" FontSize="16">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=NameText}" Value="">
+                                        <DataTrigger Binding="{Binding Text, ElementName=nameText}" Value="">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -46,14 +46,14 @@
                     </Canvas>
 
                     <Canvas Margin="0 30 0 30">
-                        <TextBox x:Name="PatronimicText" Text="{Binding Patronimic}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150"/>
+                        <TextBox x:Name="patronimicText" Text="{Binding Person.Patronimic}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150"/>
 
                         <TextBlock IsHitTestVisible="False" FontFamily="Comic Sans MS" Text=" отчество" Foreground="DarkGray" FontSize="16">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=PatronimicText}" Value="">
+                                        <DataTrigger Binding="{Binding Text, ElementName=patronimicText}" Value="">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -63,14 +63,14 @@
                     </Canvas>
 
                     <Canvas Margin="0 30 0 30">
-                        <ComboBox FontSize="16" x:Name="ComboBoxGroup" SelectedItem="{Binding Group}" DisplayMemberPath="Group1" FontFamily="Comic Sans MS" Width="150"  Height="25"/>
+                        <ComboBox FontSize="16" x:Name="comboBoxGroup" SelectedItem="{Binding Person.Group.Group1}" DisplayMemberPath="Group1" FontFamily="Comic Sans MS" Width="150"  Height="25"/>
 
                         <TextBlock IsHitTestVisible="False" FontFamily="Comic Sans MS" Text="группа" Foreground="DarkGray" FontSize="16">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=ComboBoxGroup}" Value="">
+                                        <DataTrigger Binding="{Binding Text, ElementName=comboBoxGroup}" Value="">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -83,14 +83,14 @@
 
                 <StackPanel Width="150" x:Name="textStackPanel2" >
                     <Canvas Margin="0 0 0 30">
-                        <ComboBox FontSize="16"  x:Name="ComboBoxRole"  SelectedItem="{Binding Role}" DisplayMemberPath="Role1" Width="150" Height="25" FontFamily="Comic Sans MS"/>
+                        <ComboBox FontSize="16"  x:Name="comboBoxRole"  SelectedItem="{Binding Role.Role1}" DisplayMemberPath="Role1" Width="150" Height="25" FontFamily="Comic Sans MS"/>
 
                         <TextBlock IsHitTestVisible="False" FontFamily="Comic Sans MS" Text="роль" Foreground="DarkGray" FontSize="16">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=ComboBoxRole}" Value="">
+                                        <DataTrigger Binding="{Binding Text, ElementName=comboBoxRole}" Value="">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -100,13 +100,13 @@
                     </Canvas>
 
                     <Canvas Margin="0 30 0 30">
-                        <TextBox x:Name="LoginText" Text="{Binding LoginUser}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150"/>
+                        <TextBox x:Name="loginText" Text="{Binding LoginUser}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150"/>
                         <TextBlock IsHitTestVisible="False" FontFamily="Comic Sans MS" Text="логин" Foreground="DarkGray" FontSize="16">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=LoginText}" Value="">
+                                        <DataTrigger Binding="{Binding Text, ElementName=loginText}" Value="">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -116,17 +116,21 @@
                     </Canvas>
 
                     <Canvas Margin="0 30 0 30">
-                        <PasswordBox PasswordChanged="PasswordPersonText_PasswordChanged" PasswordChar="~" FontFamily="Comic Sans MS" x:Name="PasswordPersonText" Width="150" FontSize="18" Background="Azure">
-                            <PasswordBox.ToolTip>
-                                <TextBlock FontFamily="Comic Sans MS" FontSize="16">
-                                     Буквы только латинского алфавита <LineBreak/> Не менее 8 символов <LineBreak/> Заглавные буквы <LineBreak/> Строчные буквы <LineBreak/> Цифры <LineBreak/> Любые символы кроме пароля
-                                </TextBlock>
-                            </PasswordBox.ToolTip>
-                        </PasswordBox>
-                        <TextBlock x:Name="passwordText" FontFamily="Comic Sans MS" Style="{StaticResource textBlock}" Text="пароль" FontSize="16"/>
+                        <TextBox x:Name="passwordPersonText" Text="{Binding Password}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150"/>
+                        <TextBlock IsHitTestVisible="False" FontFamily="Comic Sans MS" Text="пароль" Foreground="DarkGray" FontSize="16">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=passwordPersonText}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </Canvas>
-
-                    <Button x:Name="addUser" Click="addUserClick" Margin="0 30 0 30" Height="25" Content="Добавить" Background="White" FontSize="14" />
+                    <Button x:Name="addUser" Click="AddUserClick" Margin="0 30 0 5" Height="25" Content="Добавить" Background="White" FontSize="14" />
                 </StackPanel>
             </StackPanel>
         </Viewbox>

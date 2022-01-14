@@ -1,5 +1,8 @@
 ﻿using ControlStudy;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,41 +11,74 @@ namespace Authorization
 {
     public partial class AddWindow : Window
     {
-        public AddWindow()
+        private User _currentUser = new User();
+        public AddWindow(DataGrid dataGridAdmin)
         {
             InitializeComponent();
-            ComboBoxGroup.ItemsSource = ControlStudyEntities.GetContext().Groups.ToList();
-            ComboBoxRole.ItemsSource = ControlStudyEntities.GetContext().Roles.ToList();
+            DataContext = _currentUser;
+            comboBoxGroup.ItemsSource = ControlStudyEntities.GetContext().Groups.ToList();
+            comboBoxRole.ItemsSource = ControlStudyEntities.GetContext().Roles.ToList();
+            //dataGrid = dataGridAdmin;
         }
 
-
-        private void addUserClick(object sender, RoutedEventArgs e)
+        private void AddUserClick(object sender, RoutedEventArgs e)
         {
-            string loginUser = LoginText.Text;               // Присвоение переменным значений из textbox
-            string familyPerson = FamilyText.Text;
-            string namePerson = NameText.Text;
-            string patronimicPerson = PatronimicText.Text;
-            string group = ComboBoxGroup.Text;
-            string passwordPerson = PasswordPersonText.Password;
-            string roleRole = ComboBoxRole.Text; 
+            StringBuilder errors = new StringBuilder();
 
-            if (LoginText.Text == "" || FamilyText.Text == "" || NameText.Text == "" || PatronimicText.Text == "" || PasswordPersonText.Password == "" || ComboBoxRole.Text == "")
+            if (string.IsNullOrWhiteSpace(_currentUser.Person.Family) || string.IsNullOrWhiteSpace(_currentUser.Person.Name) || string.IsNullOrWhiteSpace(_currentUser.Person.Patronimic))
+                errors.AppendLine("ФИО");
+            if (_currentUser.Role.Role1 == null)
+                errors.AppendLine("Роль");
+            if (_currentUser.Person.Group.Group1 == null)
+                errors.AppendLine("Группа (если роль не студент выбрать пустую строку)");
+            if (string.IsNullOrWhiteSpace(_currentUser.LoginUser))
+                errors.AppendLine("Логин");
+            if (string.IsNullOrWhiteSpace(_currentUser.Password))
+                errors.AppendLine("Пароль");
+
+            if (errors.Length > 0)
             {
-                MessageBox.Show("Заполните все поля!");
+                MessageBox.Show(errors.ToString());
+                return;
             }
-            else
+
+            if (_currentUser.IdUser == 0)
+                ControlStudyEntities.GetContext().Users.Add(_currentUser);
+
+            try
             {
-                if (CheckPass() == false)
-                    MessageBox.Show("Пароль введен не верно! Проверьте правильность пароля!");
-                else
-                {
-                    Addition(loginUser, familyPerson, namePerson, patronimicPerson, group, passwordPerson, roleRole);
-
-                    MessageBox.Show("Регистрация прошла успешно!");
-
-
-                }
+                ControlStudyEntities.GetContext().SaveChanges();
+                MessageBox.Show("Пользователь добавлен!");
+                Manager.MainFrame.GoBack();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            //string loginUser = loginText.Text;               // Присвоение переменным значений из textbox
+            //string familyPerson = familyText.Text;
+            //string namePerson = nameText.Text;
+            //string patronimicPerson = patronimicText.Text;
+            //string group = comboBoxGroup.Text;
+            //string passwordPerson = passwordPersonText.Password;
+            //string roleRole = comboBoxRole.Text; 
+
+            //if (loginText.Text == "" || familyText.Text == "" || nameText.Text == "" || patronimicText.Text == "" || passwordPersonText.Password == "" || comboBoxRole.Text == "")
+            //{
+            //    MessageBox.Show("Заполните все поля!");
+            //}
+            //else
+            //{
+            //    if (CheckPass() == false)
+            //        MessageBox.Show("Пароль введен не верно! Проверьте правильность пароля!");
+            //    else
+            //    {
+            //        Addition(loginUser, familyPerson, namePerson, patronimicPerson, group, passwordPerson, roleRole);
+
+            //        MessageBox.Show("Пользователь добавлен!");
+            //    }
+            //}
         }
 
         private static int FillIdRole(string role)
@@ -80,12 +116,15 @@ namespace Authorization
             else if (group == "515")
                 idGroup = 5;
 
+            else if (group == " ")
+                idGroup = 6;
+
             return idGroup;
         }
 
         private bool CheckPass() // Проверка пароля
         {
-            var input = PasswordPersonText.Password;
+            var input = passwordPersonText.Text;
 
             var minMaxChar = new Regex(@".{8}");
             var number = new Regex(@"[0-9]+");
@@ -114,43 +153,37 @@ namespace Authorization
         }
 
         // Добаление в класс значений, введенных пользователем
-        public static void Addition(string login, string family, string name, string patronimic, string group, string password, string role)
+        //public static void Addition(string login, string family, string name, string patronimic, string group, string password, string role)
+        //{
+        //    ControlStudyEntities userContext = new ControlStudyEntities();
+
+        //    User user = new User
+        //    {
+        //        LoginUser = login,
+        //        Password = password,
+        //        IdRole = FillIdRole(role)
+        //    };
+
+        //    userContext.Users.Add(user);
+
+
+        //    Person person = new Person
+        //    {
+        //        Family = family,
+        //        Name = name,
+        //        Patronimic = patronimic,
+        //        IdGroup = FillIdGroup(group)
+        //    };
+        //    userContext.People.Add(person);
+
+        //    userContext.SaveChanges();        // Сохранение изменений
+        //    userContext.Dispose();
+        //}
+
+        private void WindowIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e) // Обновляет данные в DataGrid
         {
-            ControlStudyEntities userContext = new ControlStudyEntities();
-
-            User user = new User
-            {
-                LoginUser = login,
-                Password = password,
-                IdRole = FillIdRole(role)
-            };
-
-            userContext.Users.Add(user);
-
-
-            Person person = new Person
-            {
-                Family = family,
-                Name = name,
-                Patronimic = patronimic,
-                IdGroup = FillIdGroup(group)
-            };
-            userContext.People.Add(person);
-
-            userContext.SaveChanges();        // Сохранение изменений
-            userContext.Dispose();
-        }
-
-        private void PasswordPersonText_PasswordChanged(object sender, RoutedEventArgs e) // Открывает и скрывает watermark поля Password
-        {
-            if (PasswordPersonText.Password.Length == 0)
-            {
-                passwordText.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                passwordText.Visibility = Visibility.Hidden;
-            }
+            ControlStudyEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+            ControlStudyEntities.GetContext().Users.ToList();
         }
     }
 }    

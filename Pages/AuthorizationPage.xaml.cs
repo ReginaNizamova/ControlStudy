@@ -3,39 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-
+using Authorization.Pages;
 
 namespace ControlStudy
 {
     public partial class AuthorizationPage : Page
     {
-
         public AuthorizationPage()
         {
             InitializeComponent(); 
         }
 
-        private void InputAuthorization_Click(object sender, RoutedEventArgs e)
+        private void InputAuthorizationClick(object sender, RoutedEventArgs e)
         {
             ControlStudyEntities userContext = new ControlStudyEntities();
 
-            var check = userContext.Users.Where(top => top.Password == PasswordPersonText.Password && top.LoginUser == LoginText.Text).FirstOrDefault(); // Проверка пароля и логина
+            var check = userContext.Users.Where(top => top.Password == passwordPersonText.Password && top.LoginUser == loginText.Text).FirstOrDefault(); // Проверка пароля и логина
 
             if (check != null) // Переход на соответствующую страницу
             {
-                List<int> userRole = (from User in userContext.Users where User.LoginUser == LoginText.Text select User.IdRole).ToList();
+                List<int> userRole = (from User in userContext.Users where User.LoginUser == loginText.Text select User.IdRole).ToList();
 
                 if (userRole[0] == 1)
                 {
-                    Manager.MainFrame.Navigate(new StudentPage(LoginText.Text));
+                    Manager.MainFrame.Navigate(new StudentPage(loginText.Text));
                 }
                 else if (userRole[0] == 2)
                 {
-                    Manager.MainFrame.Navigate(new TeacherPage(LoginText.Text));
+                    Manager.MainFrame.Navigate(new TeacherPage(loginText.Text));
                 }
                 else if (userRole[0] == 3)
                 {
-                    Manager.MainFrame.Navigate(new AdminPage(LoginText.Text));
+                    Manager.MainFrame.Navigate(new AdminUsersPage(loginText.Text));
                 }
             }
             else
@@ -49,13 +48,13 @@ namespace ControlStudy
 
         private void Clean() //Очищение полей авторизации
         {
-            LoginText.Text = "";
-            PasswordPersonText.Password = "";
+            loginText.Text = "";
+            passwordPersonText.Password = "";
         }
 
-        private void PasswordPersonText_PasswordChanged(object sender, RoutedEventArgs e) // Открывает и скрывает watermark поля Password
+        private void PasswordPersonTextPasswordChanged(object sender, RoutedEventArgs e) // Открывает и скрывает watermark поля Password
         {
-            if (PasswordPersonText.Password.Length == 0)
+            if (passwordPersonText.Password.Length == 0)
             {
                 passwordText.Visibility = Visibility.Visible;
             }

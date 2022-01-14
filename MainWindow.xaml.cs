@@ -20,7 +20,7 @@ namespace ControlStudy
             BackImage.Source = (ImageSource)images.GetValue(random.Next(images.Length));  //Случайный выбор картинки
         }
 
-        private void Frame_ContentRendered(object sender, EventArgs e)
+        private void FrameContentRendered(object sender, EventArgs e)
         {
             if (Manager.MainFrame.NavigationService.CanGoBack == true)
             {
@@ -32,7 +32,7 @@ namespace ControlStudy
             }
         }
 
-        private void ButtonBack_Click(object sender, RoutedEventArgs e)         //Возврат на предыдущую страницу
+        private void ButtonBackClick(object sender, RoutedEventArgs e)         //Возврат на предыдущую страницу
         {
             Manager.MainFrame.GoBack();
         }

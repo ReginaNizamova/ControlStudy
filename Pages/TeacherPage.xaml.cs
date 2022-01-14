@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data.Entity;
 using System.ComponentModel;
 using Authorization;
 
@@ -20,12 +9,14 @@ namespace ControlStudy
 {
     public partial class TeacherPage : Page
     {
-        readonly SessionTimer Timer = new SessionTimer(); //Dключение таймера
+        readonly SessionTimer Timer = new SessionTimer(); //Включение таймера
 
         public TeacherPage(string loginNowUser)
         {
             InitializeComponent();
             AddDataInDataGridProgress();
+            textDiscipline.ItemsSource = ControlStudyEntities.GetContext().Disciplines.ToList();
+            comboBoxGroup.ItemsSource = ControlStudyEntities.GetContext().Groups.ToList();
 
             Application.Current.MainWindow.Closing += new CancelEventHandler(MainWindowClosing);
 
@@ -96,21 +87,21 @@ namespace ControlStudy
             dataGridProgress.ItemsSource = result.ToList();
         }
 
-        private void AddData_Click(object sender, RoutedEventArgs e) // Вызывает метод добавления данных при нажатии на кнопку "Добавить"
+        private void AddDataClick(object sender, RoutedEventArgs e) // Вызывает метод добавления данных при нажатии на кнопку "Добавить"
         {
             string name = textName.Text;
             string grade = textGrade.Text;
             string discipline = textDiscipline.Text;
-            string idStudent = IdStudent.Text;
+            string studentId = idStudent.Text;
 
-            if (name == "" || grade == "" || discipline == "" || idStudent == "")
+            if (name == "" || grade == "" || discipline == "" || studentId == "")
             {
                 MessageBox.Show("Заполните все поля!");
             }
 
             else
             {
-                AddData(grade, discipline, idStudent);
+                AddData(grade, discipline, studentId);
                 MessageBox.Show("Оценка добавлена!");
             }
 
@@ -126,11 +117,11 @@ namespace ControlStudy
 
             //if (discipline == "Математика")
             //{ 
-            //    var Result = (from Progress in userContext.Progresses
-            //             where Progress.CodePerson == Cs && Progress.CodeDiscipline == 1 && Progress.Grade == Gr
-            //             select Progress.CodeProgress).First();
+            //var Result = (from Progress in userContext.Progresses
+            //              where Progress.CodePerson == Cs && Progress.CodeDiscipline == 1 && Progress.Grade == Gr
+            //              select Progress.CodeProgress).First();
 
-            //    userContext.Progresses.RemoveRange(userContext.Progresses.Where(x => x.CodeProgress == Result));
+            //userContext.Progresses.RemoveRange(userContext.Progresses.Where(x => x.CodeProgress == Result));
             //}
 
             //else if (discipline == "Английский язык")
@@ -174,153 +165,71 @@ namespace ControlStudy
             //AddDataInDataGridProgress();
         }
 
-        private void DeleteData_Click(object sender, RoutedEventArgs e) // Вызывает метод удаления данных при нажатии на кнопку "Удалить"
+        private void DeleteDataClick(object sender, RoutedEventArgs e) // Вызывает метод удаления данных при нажатии на кнопку "Удалить"
         {
             string name = textName.Text;
             string grade = textGrade.Text;
             string discipline = textDiscipline.Text;
-            string idStudent = IdStudent.Text;
+            string studentId = idStudent.Text;
 
-            if (name == "" || grade == "" || discipline == "" || idStudent == "")
+            if (name == "" || grade == "" || discipline == "" || studentId == "")
             {
                 MessageBox.Show("Заполните все поля!");
             }
 
             else
             {
-                DeleteData(grade, discipline, idStudent);
+                DeleteData(grade, discipline, studentId);
                 MessageBox.Show("Оценка Удалена!");
             }
 
         }
-      
-    
 
-        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e) // Выбор значений для textName (ФИО) в зависимости от значения comboBoxGroup
+        private static int FillIdGroup(string group)
+        {
+            int id = 0;
+
+            if (group == "115")
+                id = 1;
+
+            else if (group == "215")
+                id = 2;
+
+            else if (group == "315")
+                id = 3;
+
+            else if (group == "415")
+                id = 4;
+
+            else if (group == "515")
+                id = 5;
+
+            return id;
+        }
+
+        private void SelectorOnSelectionChanged(object sender, SelectionChangedEventArgs e) // Выбор значений для textName (ФИО) в зависимости от значения comboBoxGroup
         {
             ComboBoxItem currentItem = ((ComboBoxItem)comboBoxGroup.SelectedItem);
-
             string valueComboBoxGroup = currentItem.Content.ToString();
-
             ControlStudyEntities userContext = new ControlStudyEntities();
 
-            //switch (valueComboBoxGroup)
-            //{
-            //    case "101":
-            //    {
-            //        textName.Items.Clear();
-            //        var Result = from Person in userContext.People
-            //                     where Person.CodeGroup == 1
-            //                     select new
-            //                     {
-            //                         Person.Family,
-            //                         Person.Name,
-            //                         Person.CodePerson
-            //                     };
+            textName.Items.Clear();
+            var result = from Person in userContext.People
+                            where Person.IdGroup == FillIdGroup(valueComboBoxGroup)
+                            select new
+                            {
+                                Person.Family,
+                                Person.Name,
+                                Person.IdPerson
+                            };
 
-            //        Result.ToList();
+            result.ToList();
 
-            //        foreach (var item in Result)
-            //        {
-            //            textName.Items.Add(item.Family + " " + item.Name);
-            //            codeStudent.Text = Convert.ToString(item.CodePerson);
-            //        }
-            //        break;
-            //    }
-
-            //    case "201":
-            //    {
-            //        textName.Items.Clear();
-            //        var Result = from Person in userContext.People
-            //                     where Person.CodeGroup == 2
-            //                     select new
-            //                     {
-            //                         Person.Family,
-            //                         Person.Name,
-            //                         Person.CodePerson
-            //                     };
-
-            //        Result.ToList();
-
-            //        foreach (var item in Result)
-            //        {
-            //            textName.Items.Add(item.Family + " " + item.Name);
-            //            codeStudent.Text = Convert.ToString(item.CodePerson);
-            //        }
-            //        break;
-            //    }
-
-            //    case "301":
-            //    {
-            //        textName.Items.Clear();
-            //        var Result = from Person in userContext.People
-            //                     where Person.CodeGroup == 3
-            //                     select new
-            //                     {
-            //                         Person.Family,
-            //                         Person.Name,
-            //                         Person.CodePerson
-            //                     };
-
-            //        Result.ToList();
-
-            //        foreach (var item in Result)
-            //        {
-            //            textName.Items.Add(item.Family + " " + item.Name);
-            //            codeStudent.Text = Convert.ToString(item.CodePerson);
-            //        }
-            //        break;
-            //    }
-
-            //    case "401":
-            //    {
-            //        textName.Items.Clear();
-            //        var Result = from Person in userContext.People
-            //                     where Person.CodeGroup == 4
-            //                     select new
-            //                     {
-            //                         Person.Family,
-            //                         Person.Name,
-            //                         Person.CodePerson
-            //                     };
-
-            //        Result.ToList();
-
-            //        foreach (var item in Result)
-            //        {
-            //            textName.Items.Add(item.Family + " " + item.Name);
-            //            codeStudent.Text = Convert.ToString(item.CodePerson);
-            //        }
-            //        break;
-            //    }
-
-            //    case "501":
-            //    {
-            //        textName.Items.Clear();
-            //        var Result = from Person in userContext.People
-            //                     where Person.CodeGroup == 5
-            //                     select new
-            //                     {
-            //                         Person.Family,
-            //                         Person.Name,
-            //                         Person.CodePerson
-            //                     };
-
-            //        Result.ToList();
-
-            //        foreach (var item in Result)
-            //        {
-            //            textName.Items.Add(item.Family + " " + item.Name);
-            //            codeStudent.Text = Convert.ToString(item.CodePerson);
-            //        }
-            //        break;
-            //    }
-
-            //    default:
-            //    {
-            //        break;
-            //    }
-            //}
+            foreach (var item in result)
+            {
+                textName.Items.Add(item.Family + " " + item.Name);
+                idStudent.Text = Convert.ToString(item.IdPerson);
+            }            
         }
     } 
 }
