@@ -20,7 +20,7 @@ namespace Authorization
             this.Users = new HashSet<User>();
         }
     
-        public int CodeRole { get; set; }
+        public int IdRole { get; set; }
         public string Role1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

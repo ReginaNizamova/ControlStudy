@@ -1,4 +1,4 @@
-﻿<Window x:Class="Authorization.MainWindow"
+﻿<Window x:Class="ControlStudy.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -22,11 +22,11 @@
             <Setter Property="Background" Value="Azure"/>
         </Style>
         <x:Array x:Key="Images" Type="ImageSource">
-            <BitmapImage UriSource="Sources/Background/01.jpg"/>
-            <BitmapImage UriSource="Sources/Background/02.jpg"/>
-            <BitmapImage UriSource="Sources/Background/03.jpg"/>
-            <BitmapImage UriSource="Sources/Background/04.jpg"/>
-            <BitmapImage UriSource="Sources/Background/05.jpg"/>
+            <BitmapImage UriSource="Resource/Background/01.jpg"/>
+            <BitmapImage UriSource="Resource/Background/02.jpg"/>
+            <BitmapImage UriSource="Resource/Background/03.jpg"/>
+            <BitmapImage UriSource="Resource/Background/04.jpg"/>
+            <BitmapImage UriSource="Resource/Background/05.jpg"/>
         </x:Array>
     </Window.Resources>
     
@@ -47,7 +47,7 @@
                     <TextBlock Text="Назад"/>
                 </ToolTip>
             </Button.ToolTip>
-            <Image Source="/Sources/Back.png"/>
+            <Image Source="/Resource/back.png"/>
         </Button> 
     </Grid>
 </Window>

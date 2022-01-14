@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3235335dccdb4d4aac2071adab85bd9a" Name="Diagram1" ZoomLevel="111">
-        <EntityTypeShape EntityType="AuthorizationnModel.Discipline" Width="1.5" PointX="3" PointY="7.25" />
-        <EntityTypeShape EntityType="AuthorizationnModel.Group" Width="1.5" PointX="0.75" PointY="4.125" />
-        <EntityTypeShape EntityType="AuthorizationnModel.Person" Width="1.5" PointX="3" PointY="3.375" />
-        <EntityTypeShape EntityType="AuthorizationnModel.Progress" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="AuthorizationnModel.Role" Width="1.5" PointX="3" PointY="10.125" />
-        <EntityTypeShape EntityType="AuthorizationnModel.User" Width="1.5" PointX="5.25" PointY="3.875" />
-        <AssociationConnector Association="AuthorizationnModel.FK_Discipline_Progress" />
-        <AssociationConnector Association="AuthorizationnModel.FK_Group" />
-        <AssociationConnector Association="AuthorizationnModel.FK_Person_Progress" />
-        <AssociationConnector Association="AuthorizationnModel.FK_Users" />
-        <AssociationConnector Association="AuthorizationnModel.FK_Roles" />
-        <EntityTypeShape EntityType="AuthorizationnModel.Session" Width="1.5" PointX="0.75" PointY="6.375" />
-        <AssociationConnector Association="AuthorizationnModel.FK_Session_Person" />
+      <Diagram DiagramId="e0c19d47ea97441d8dd5563345b63849" Name="Diagram1">
+        <EntityTypeShape EntityType="ControlStudyModel.Discipline" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlStudyModel.Group" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlStudyModel.Person" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlStudyModel.Progress" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlStudyModel.Role" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlStudyModel.Session" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlStudyModel.User" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="ControlStudyModel.FK_Discipline_Progress" ManuallyRouted="false" />
+        <AssociationConnector Association="ControlStudyModel.FK_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="ControlStudyModel.FK_Person_Progress" ManuallyRouted="false" />
+        <AssociationConnector Association="ControlStudyModel.FK_Session_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="ControlStudyModel.FK_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ControlStudyModel.FK_Roles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

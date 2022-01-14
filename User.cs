@@ -14,10 +14,11 @@ namespace Authorization
     
     public partial class User
     {
-        public int CodePerson { get; set; }
+        public int IdUser { get; set; }
         public string LoginUser { get; set; }
         public string Password { get; set; }
-        public int CodeRole { get; set; }
+        public int IdRole { get; set; }
+        public int IdPerson { get; set; }
     
         public virtual Person Person { get; set; }
         public virtual Role Role { get; set; }

@@ -14,9 +14,9 @@ namespace Authorization
     
     public partial class Progress
     {
-        public int CodeProgress { get; set; }
-        public int CodePerson { get; set; }
-        public int CodeDiscipline { get; set; }
+        public int IdProgress { get; set; }
+        public int IdPerson { get; set; }
+        public int IdDiscipline { get; set; }
         public int Grade { get; set; }
         public System.DateTime DateGrade { get; set; }
     

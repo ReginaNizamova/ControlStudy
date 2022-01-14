@@ -1,25 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data.Entity;
 
 
-namespace Authorization
+namespace ControlStudy
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
 
@@ -28,8 +13,8 @@ namespace Authorization
         public MainWindow()
         {
             InitializeComponent();
-            Manager.MainFrame = this.frame;
-            frame.Navigate(new RegistrationPage());
+            Manager.MainFrame = frame;
+            frame.Navigate(new AuthorizationPage());
 
             Array images = (Array)Resources["Images"];                                    //Массив картинок для фона
             BackImage.Source = (ImageSource)images.GetValue(random.Next(images.Length));  //Случайный выбор картинки

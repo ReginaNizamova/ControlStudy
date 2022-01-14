@@ -19,22 +19,21 @@ namespace Authorization
         {
             this.Progresses = new HashSet<Progress>();
             this.Sessions = new HashSet<Session>();
+            this.Users = new HashSet<User>();
         }
     
-        public int CodePerson { get; set; }
+        public int IdPerson { get; set; }
         public string Family { get; set; }
         public string Name { get; set; }
         public string Patronimic { get; set; }
-        public System.DateTime Birthday { get; set; }
-        public string Gender { get; set; }
-        public string Email { get; set; }
-        public int CodeGroup { get; set; }
+        public int IdGroup { get; set; }
     
         public virtual Group Group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Progress> Progresses { get; set; }
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Session> Sessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

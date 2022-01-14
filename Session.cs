@@ -14,8 +14,8 @@ namespace Authorization
     
     public partial class Session
     {
-        public int CodeSession { get; set; }
-        public int CodePerson { get; set; }
+        public int IdSession { get; set; }
+        public int IdPerson { get; set; }
         public System.DateTime DateSession { get; set; }
         public string Time { get; set; }
     

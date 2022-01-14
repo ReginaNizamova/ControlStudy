@@ -13,10 +13,10 @@ namespace Authorization
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AuthorizationnEntities : DbContext
+    public partial class ControlStudyEntities : DbContext
     {
-        public AuthorizationnEntities()
-            : base("name=AuthorizationnEntities")
+        public ControlStudyEntities()
+            : base("name=ControlStudyEntities")
         {
         }
     
@@ -24,13 +24,22 @@ namespace Authorization
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        private static ControlStudyEntities _context;
+
+        public static ControlStudyEntities GetContext()
+        {
+            if (_context == null)
+                _context = new ControlStudyEntities();
+            return _context;
+        }
+
         public virtual DbSet<Discipline> Disciplines { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Progress> Progresses { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

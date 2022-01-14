@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Authorization
+namespace ControlStudy
 {
     public static class Manager
     {

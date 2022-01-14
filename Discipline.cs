@@ -20,7 +20,7 @@ namespace Authorization
             this.Progresses = new HashSet<Progress>();
         }
     
-        public int CodeDiscipline { get; set; }
+        public int IdDiscipline { get; set; }
         public string Discipline1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

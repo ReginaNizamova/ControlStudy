@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Data;
+using System.Linq;
+using Authorization;
 
-namespace Authorization
+namespace ControlStudy
 {
     public partial class StudentPage : Page
     {
@@ -34,16 +25,16 @@ namespace Authorization
             buttonProgress.Tag = loginNowUser;
         }
 
-        readonly AuthorizationnEntities userContext = new AuthorizationnEntities();
+        readonly ControlStudyEntities userContext = new ControlStudyEntities();
 
         private void WindowLoaded(object sender, RoutedEventArgs e) // Заполнение DataGrid
         {
             string loginNowUser = buttonProgress.Tag.ToString();
 
             var query = from Progress in userContext.Progresses
-                        join Discipline in userContext.Disciplines on Progress.CodeDiscipline equals Discipline.CodeDiscipline
-                        join Person in userContext.People on Progress.CodePerson equals Person.CodePerson
-                        join User in userContext.Users on Person.CodePerson equals User.CodePerson
+                        join Discipline in userContext.Disciplines on Progress.IdDiscipline equals Discipline.IdDiscipline
+                        join Person in userContext.People on Progress.IdPerson equals Person.IdPerson
+                        join User in userContext.Users on Person.IdPerson equals User.IdPerson
                         where User.LoginUser == loginNowUser
                         select new
                         {
@@ -52,7 +43,7 @@ namespace Authorization
                             Дата = Progress.DateGrade.ToString()
                         };
 
-            dataGridProgress.ItemsSource = query.ToList(); 
+            dataGridProgress.ItemsSource = query.ToList();
         }
     }
 }

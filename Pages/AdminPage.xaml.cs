@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.ComponentModel;
+using Authorization.Pages;
 
-namespace Authorization
+namespace ControlStudy
 {
     public partial class AdminPage : Page
     {
         readonly SessionTimer Timer = new SessionTimer(); //Включение таймера
+       
 
         public AdminPage(string loginNowUser)
         {
@@ -32,29 +23,29 @@ namespace Authorization
             }
         }
 
-        private void AdminButton_Click(object sender, RoutedEventArgs e) //Выводит данные в DataGrid
+        private void Users_Click(object sender, RoutedEventArgs e) //Переход на страницу UserPage
         {
-            AuthorizationnEntities userContext = new AuthorizationnEntities();
-
-            var result = from Person in userContext.People 
-                         join User in userContext.Users on Person.CodePerson equals User.CodePerson
-                         join Role in userContext.Roles on User.CodeRole equals Role.CodeRole
-                         select new
-                         { 
-                             Логин = User.LoginUser,
-                             Должность = Role.Role1,
-                             Фамилия = Person.Family,
-                             Имя = Person.Name,
-                             Отчество = Person.Patronimic
-                         };
-
-            dataGridAdmin.ItemsSource = result.ToList();
+            Manager.MainFrame.Navigate(new UsersPage());
         }
 
-        private void DataUser (object sender, RoutedEventArgs e) // Выводит информацию о последней сессии пользователя
+        private void Journal_Click(object sender, RoutedEventArgs e) //Выводит данные в DataGrid
         {
-            labelDataUser.Background = Brushes.Azure;
-            labelDataUser.Content = SessionTimer.DataLastSession(loginTextBox.Text);
+            //var result = from Person in userContext.People
+            //             join User in userContext.Users on Person.IdPerson equals User.IdPerson
+            //             join Role in userContext.Roles on User.IdRole equals Role.IdRole
+            //             join Session in userContext.Sessions on Person.IdPerson equals Session.IdPerson
+            //             select new
+            //             {
+            //                 Дата = Session.DateSession,
+            //                 Время = Session.Time,
+            //                 Роль = Role.Role1,
+            //                 Логин = User.LoginUser,
+            //                 Фамилия = Person.Family,
+            //                 Имя = Person.Name,
+            //             };
+
+            //dataGridAdmin.ItemsSource = result.ToList();
         }
+
     }
 }
