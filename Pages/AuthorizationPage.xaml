@@ -23,16 +23,6 @@
     </Page.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-
-        <Viewbox Stretch="Uniform"  MaxWidth="250" Margin="20 20 50 330" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Label Content="Вход" Margin="20" Style="{StaticResource heading}" />
-        </Viewbox>
-
         <Viewbox Stretch="Uniform" Grid.Column="1" MaxWidth="250" Margin="70 0 70 0">
             <StackPanel Orientation="Vertical">
                 <StackPanel Width="150">

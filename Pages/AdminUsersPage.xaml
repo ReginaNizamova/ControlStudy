@@ -9,37 +9,21 @@
       Title="UsersPage">
 
     <Grid>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="7*"/>
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition  Height="7*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        
-        <StackPanel Orientation="Vertical" Grid.RowSpan="2" VerticalAlignment="Center">
-            <Button x:Name="users" MaxHeight="170" Background="Transparent" Margin="0 0 0 40" BorderThickness="0" ToolTip="Пользователи" Cursor="Hand">
-                <Image  Source="/Resource/users.png" Margin="10" MaxHeight="110"/>
-            </Button>
 
-            <Button x:Name="journal"  MaxHeight="170" Background="Transparent" BorderThickness="0" Margin="0 25" ToolTip="Журнал посещений" Cursor="Hand">
-                <Image Source="/Resource/journal.png" Margin="10" MaxHeight="110"/>
-            </Button>
-        </StackPanel>
 
         <DataGrid  ColumnWidth="*" HorizontalScrollBarVisibility="Auto"  AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="1" Margin="25" x:Name="dataGridAdmin" FontSize="15"  Opacity="0.85" Background="Azure"  AlternatingRowBackground="#9ACeeb" AlternationCount="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Роль"      Binding="{Binding Role.Role1}" />
-                <DataGridTextColumn Header="Логин"     Binding="{Binding LoginUser}" />
-                <DataGridTextColumn Header="Пароль"    Binding="{Binding Password}" />
-                <DataGridTextColumn Header="Группа"    Binding="{Binding Person.Group.Group1}" />
-                <DataGridTextColumn Header="Фамилия"   Binding="{Binding Person.Family}"/>
-                <DataGridTextColumn Header="Имя"       Binding="{Binding Person.Name}"/>
-                <DataGridTextColumn Header="Отчество"  Binding="{Binding Person.Patronimic}" />
+                <DataGridTextColumn Header="Роль"      Binding="{Binding Role.Role1}" Width="1.5*"/>
+                <DataGridTextColumn Header="Логин"     Binding="{Binding LoginUser}" Width="*"/>
+                <DataGridTextColumn Header="Пароль"    Binding="{Binding Password}" Width="*"/>
+                <DataGridTextColumn Header="Группа"    Binding="{Binding Person.Group.Group1}" Width="*"/>
+                <DataGridTextColumn Header="Фамилия"   Binding="{Binding Person.Family}" Width="1.5*"/>
+                <DataGridTextColumn Header="Имя"       Binding="{Binding Person.Name}" Width="*"/>
+                <DataGridTextColumn Header="Отчество"  Binding="{Binding Person.Patronimic}" Width="*"/>
                 <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -48,13 +32,6 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
-            <DataGridTemplateColumn Width="auto">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Button Content="Редактировать" x:Name="edit" Click="EditClick"/>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#9ACeeb"/>
@@ -69,11 +46,7 @@
                 <Image Source="/Resource/addUser.png"/>
             </Button>
 
-            <Button x:Name="change" BorderThickness="0" Margin="0 0 70 0" Width="50" Background="Transparent">
-                <Image Source="/Resource/changeUser.png"/>
-            </Button>
-
-            <Button x:Name="delete" BorderThickness="0" Margin="0 0 70 0" Width="50" Background="Transparent">
+            <Button x:Name="delete" Click="DeleteClick" BorderThickness="0" Width="60" Background="Transparent">
                 <Image Source="/Resource/deleteUser.png"/>
             </Button>
         </StackPanel>

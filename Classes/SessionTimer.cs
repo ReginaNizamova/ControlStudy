@@ -25,16 +25,27 @@ namespace ControlStudy
             TimeSpan timeSpan = endTime - startTime;
             DateTime Date = DateTime.Now;
 
-            int codePerson = userContext.Users.Where(c => c.LoginUser == login).Select(c => c.IdPerson).FirstOrDefault();
+            int idPerson = userContext.Users.Where(c => c.LoginUser == login).Select(c => c.IdPerson).FirstOrDefault();
+            var findIdPerson = userContext.Sessions.Where(c => c.IdPerson == idPerson).FirstOrDefault();
 
-            Session sessionUser = new Session
+
+            if(findIdPerson == null)
             {
-                DateSession = Date,
-                IdPerson = codePerson,
-                Time = Convert.ToString(timeSpan.Hours + ":" + timeSpan.Minutes + ":" + timeSpan.Seconds)
-            };
+                Session sessionUser = new Session
+                {
+                    DateSession = Date,
+                    IdPerson = idPerson,
+                    Time = Convert.ToString(timeSpan.Hours + ":" + timeSpan.Minutes + ":" + timeSpan.Seconds)
+                };
 
-            userContext.Sessions.Add(sessionUser);
+                userContext.Sessions.Add(sessionUser);
+            }
+            else
+            {
+                findIdPerson.Time = Convert.ToString(timeSpan.Hours + ":" + timeSpan.Minutes + ":" + timeSpan.Seconds);
+                findIdPerson.DateSession = Date;
+            }
+
             userContext.SaveChanges();
             timer.Stop();
         }

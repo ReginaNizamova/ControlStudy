@@ -34,7 +34,7 @@ namespace ControlStudy
                 }
                 else if (userRole[0] == 3)
                 {
-                    Manager.MainFrame.Navigate(new AdminUsersPage(loginText.Text));
+                    Manager.MainFrame.Navigate(new AdminPage(loginText.Text));
                 }
             }
             else
