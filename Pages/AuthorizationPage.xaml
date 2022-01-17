@@ -7,11 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
     <Page.Resources>
-        <Style TargetType="Label" x:Key="heading">
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
         <Style TargetType="TextBox" x:Key="textBox">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Background" Value="Azure"/>

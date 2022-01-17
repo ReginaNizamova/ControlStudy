@@ -15,27 +15,20 @@
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid ColumnWidth="*" AutoGenerateColumns="False" Margin="25" x:Name="dataGridProgress" FontSize="15" HorizontalScrollBarVisibility="Visible" Opacity="0.85" Background="Azure"  AlternatingRowBackground="#9ACeeb" AlternationCount="2">
-            <DataGrid.Resources>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="#9ACeeb"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="Height" Value="30"/>
-                </Style>
-            </DataGrid.Resources>
+        <DataGrid BorderThickness="0" ColumnWidth="*" IsReadOnly="True"  AutoGenerateColumns="False" Margin="25" x:Name="dataGridProgress" FontSize="15" Opacity="0.85" Background="Azure"  AlternatingRowBackground="#9ACeeb" AlternationCount="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Группа" Binding="{Binding Person.Group.Group1}"/>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding Person.Family}"/>
-                <DataGridTextColumn Header="Имя" Binding="{Binding Person.Name}"/>
+                <DataGridTextColumn Header="Группа" Binding="{Binding Person.Group.Group1}" Width="*"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Person.Family}" Width="1.5*"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Person.Name}" Width="1.5*"/>
                 <DataGridTextColumn Header="Дисциплина" Binding="{Binding Discipline.Discipline1}" Width="2*"/>
-                <DataGridTextColumn Header="Оценка" Binding="{Binding Grade}"/>
-                <DataGridTextColumn Header="Дата" Binding="{Binding DateGrade}"/>
+                <DataGridTextColumn Header="Оценка" Binding="{Binding Grade}" Width="*"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding DateGrade.Date, StringFormat=dd.MM.yyyy}" Width="2*"/>
                 <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -44,18 +37,29 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#9ACeeb"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Height" Value="30"/>
+                </Style>
+            </DataGrid.Resources>
         </DataGrid>
 
+        <Border Grid.Row="1" Background="Black" Opacity="0.5"/>
+
         <StackPanel HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal">
-            <Button x:Name="add" Click="AddClick" BorderThickness="0" Margin="0 0 80 0" Width="50" Background="Transparent">
+            <Button x:Name="add" Click="AddClick" BorderThickness="0"  Width="50" Background="Transparent">
                 <Image Source="/Resource/addGrade.png"/>
             </Button>
 
-            <Button x:Name="delete" Click="DeleteClick" BorderThickness="0" Width="60" Background="Transparent">
+            <Button x:Name="delete" Click="DeleteClick" BorderThickness="0" Margin="80 0 80 0" Width="60" Background="Transparent">
                 <Image Source="/Resource/deleteGrade.png"/>
             </Button>
-        </StackPanel>
 
-        <!--<TextBox BorderThickness="0" Width="0" Height="0" Background="Transparent" Foreground="Transparent" x:Name="idStudent"/>-->
+            <Button x:Name="print" Click="PrintClick" BorderThickness="0" Width="60" Background="Transparent">
+                <Image Source="/Resource/print.png"/>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

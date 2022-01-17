@@ -49,12 +49,36 @@ namespace ControlStudy
                     ControlStudyEntities.GetContext().SaveChanges();
                     MessageBox.Show("Данные удалены!");
 
-                    dataGridProgress.ItemsSource = ControlStudyEntities.GetContext().Users.ToList();
+                    dataGridProgress.ItemsSource = ControlStudyEntities.GetContext().Progresses.ToList();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message.ToString());
                 }
+            }
+        }
+
+        private void PrintClick(object sender, RoutedEventArgs e)
+        {
+            PrintDialog printDialog = new PrintDialog();
+            if((bool)printDialog.ShowDialog().GetValueOrDefault())
+            {   
+                grid.Visibility = Visibility.Collapsed;
+                int pageMargin = 5;
+
+                Size pageSize = new Size(printDialog.PrintableAreaWidth - pageMargin * 2, printDialog.PrintableAreaHeight - 20);
+                dataGridProgress.Measure(pageSize);
+                dataGridProgress.Arrange(new Rect(pageMargin, pageMargin, pageSize.Width, pageSize.Height));
+
+                printDialog.PageRangeSelection = PageRangeSelection.AllPages;
+                printDialog.UserPageRangeEnabled = true;
+
+                dataGridProgress.Columns.Remove(dataGridProgress.ColumnFromDisplayIndex(6));
+                printDialog.PrintVisual(dataGridProgress, "Печать оценок");
+
+                grid.Visibility = Visibility.Visible;
+
+                dataGridProgress.ItemsSource = ControlStudyEntities.GetContext().Progresses.ToList();
             }
         }
     } 

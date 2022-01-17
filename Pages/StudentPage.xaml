@@ -8,28 +8,13 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StudentPage">
 
-    <Page.Resources>
-        <Style TargetType="Button" x:Key="heading">
-            <Setter Property="FontSize" Value="23"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
-    </Page.Resources>
-
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="4*"/>
-        </Grid.RowDefinitions>
-
-        <Button x:Name="buttonProgress" Content="Успеваемость" Background="Transparent" BorderThickness="0" Style="{StaticResource heading}" Click="WindowLoaded" Margin="20 40 0 0" />
-
-        <DataGrid ColumnWidth="*" Grid.Column="1" Grid.RowSpan="2" Margin="25" x:Name="dataGridProgress" FontSize="15" HorizontalScrollBarVisibility="Visible" Opacity="0.85" Background="Azure"  AlternatingRowBackground="#9ACeeb" AlternationCount="2">
+        <DataGrid ColumnWidth="*" IsReadOnly="True" AutoGenerateColumns="False" Margin="25" x:Name="dataGridProgress" FontSize="15" Opacity="0.85" Background="Azure"  AlternatingRowBackground="#9ACeeb" AlternationCount="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дисциплина"      Binding="{Binding Discipline.Discipline1}" Width="1.5*"/>
+                <DataGridTextColumn Header="Оценка"     Binding="{Binding Grade}" Width="*"/>
+                <DataGridTextColumn Header="Дата"    Binding="{Binding DateGrade, StringFormat= dd.MM.yyyy}" Width="*"/>
+            </DataGrid.Columns>
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#9ACeeb"/>

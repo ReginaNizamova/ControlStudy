@@ -17,7 +17,7 @@ namespace ControlStudy
             frame.Navigate(new AuthorizationPage());
 
             Array images = (Array)Resources["Images"];                                    //Массив картинок для фона
-            BackImage.Source = (ImageSource)images.GetValue(random.Next(images.Length));  //Случайный выбор картинки
+            backgroundImage.Source = (ImageSource)images.GetValue(random.Next(images.Length));  //Случайный выбор картинки
         }
 
         private void FrameContentRendered(object sender, EventArgs e)

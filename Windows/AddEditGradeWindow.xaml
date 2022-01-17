@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Authorization"
         mc:Ignorable="d"
-        Title="Добавить оценку" WindowStartupLocation="CenterScreen" Closed="WindowClosed" Height="300" Width="500" MaxHeight="300" MaxWidth="500" Background="#031745">
+        Title="Добавить оценку" WindowStartupLocation="CenterScreen" Closed="WindowClosed" Height="300" Width="500" MaxHeight="300" MaxWidth="500" MinHeight="300" MinWidth="500" Background="#031745">
     <Grid>
         <Viewbox Stretch="Uniform"  MaxHeight="170">
             <StackPanel Orientation="Horizontal">
                 <StackPanel  Width="150" x:Name="textStackPanel" Margin="0 0 30 0">
                     <Canvas Margin="0 0 0 30">
-                        <ComboBox FontSize="16" x:Name="comboBoxGroup" SelectedItem="{Binding Person.Group}" DisplayMemberPath="Group1" FontFamily="Comic Sans MS" Width="150"  Height="25"/>
+                        <ComboBox FontSize="16" x:Name="comboBoxGroup" SelectionChanged ="СomboBoxGroupOnSelectionChanged"  SelectedItem="{Binding Person.Group}" DisplayMemberPath="Group1" FontFamily="Comic Sans MS" Width="150"  Height="25"/>
 
                         <TextBlock IsHitTestVisible="False" FontFamily="Comic Sans MS" Text="группа" Foreground="DarkGray" FontSize="16">
                             <TextBlock.Style>
@@ -26,33 +26,16 @@
                             </TextBlock.Style>
                         </TextBlock>
                     </Canvas>
-                    
-                    <Canvas Margin="0 30 0 30">
-                        <TextBox  x:Name="familyText" Text="{Binding Person.Family}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150" />
 
-                        <TextBlock IsHitTestVisible="False" Text="фамилия" FontFamily="Comic Sans MS" Foreground="DarkGray" FontSize="16">
+                    <Canvas Margin="0 30 0 30">
+                        <ComboBox FontSize="16" x:Name="comboBoxPerson" SelectedItem="{Binding Person.Family}" FontFamily="Comic Sans MS" Width="150"  Height="25"/>
+
+                        <TextBlock IsHitTestVisible="False" FontFamily="Comic Sans MS" Text="фамилия" Foreground="DarkGray" FontSize="16">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=familyText}" Value="">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                    </Canvas>
-
-                    <Canvas Margin="0 30 0 30">
-                        <TextBox x:Name="nameText" FontFamily="Comic Sans MS" Text="{Binding Person.Name}" Style="{StaticResource textBox}" Width="150" />
-
-                        <TextBlock IsHitTestVisible="False" FontFamily="Comic Sans MS" Text="имя" Foreground="DarkGray" FontSize="16">
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=nameText}" Value="">
+                                        <DataTrigger Binding="{Binding Text, ElementName=comboBoxPerson}" Value="">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -82,7 +65,7 @@
                     </Canvas>
 
                     <Canvas Margin="0 30 0 30">
-                        <TextBox x:Name="gradeText" Text="{Binding Grade}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150"/>
+                        <TextBox x:Name="gradeText" ToolTip="Цифры от 2 до 5" PreviewTextInput="GradePreviewTextInput" Text="{Binding Grade}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150"/>
                         <TextBlock IsHitTestVisible="False" FontFamily="Comic Sans MS" Text="оценка" Foreground="DarkGray" FontSize="16">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
@@ -97,6 +80,7 @@
                         </TextBlock>
                     </Canvas>
                     <Button x:Name="addGrade" Click="AddEditGradeClick" Margin="0 30 0 5" Height="25" Content="Добавить" Background="White" FontSize="14" />
+                    <TextBox BorderThickness="0" Width="0" Height="0" Background="Transparent" Foreground="Transparent" x:Name="idStudent"/>
                 </StackPanel>
             </StackPanel>
         </Viewbox>

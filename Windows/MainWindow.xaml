@@ -6,28 +6,19 @@
         xmlns:local="clr-namespace:Authorization"
         mc:Ignorable="d"
         Title="ControlStudy" Height="450" Width="800" MinHeight="450" MinWidth="800">
-    
-    
+
+
     <Window.Resources>
-        <Style TargetType="Label" x:Key="heading">
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
-        <Style TargetType="Label" x:Key="text">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
         <Style TargetType="TextBox" x:Key="textBox">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Background" Value="Azure"/>
         </Style>
         <x:Array x:Key="Images" Type="ImageSource">
-            <BitmapImage UriSource="Resource/Background/01.jpg"/>
-            <BitmapImage UriSource="Resource/Background/02.jpg"/>
-            <BitmapImage UriSource="Resource/Background/03.jpg"/>
-            <BitmapImage UriSource="Resource/Background/04.jpg"/>
-            <BitmapImage UriSource="Resource/Background/05.jpg"/>
+            <BitmapImage UriSource="/Resource/Background/01.jpg"/>
+            <BitmapImage UriSource="/Resource/Background/02.jpg"/>
+            <BitmapImage UriSource="/Resource/Background/03.jpg"/>
+            <BitmapImage UriSource="/Resource/Background/04.jpg"/>
+            <BitmapImage UriSource="/Resource/Background/05.jpg"/>
         </x:Array>
     </Window.Resources>
     
@@ -38,11 +29,11 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <Image x:Name="BackImage" Grid.ColumnSpan="3" Stretch="UniformToFill"/>
+        <Image x:Name="backgroundImage" Grid.ColumnSpan="3" Stretch="UniformToFill"/>
 
         <Frame ContentRendered="FrameContentRendered" x:Name="frame" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden"/>
 
-        <Button Background="Transparent" BorderThickness="0" Height="35" VerticalAlignment="Top" Margin="5 0 0  0" Name="buttonBack" HorizontalAlignment="Left" Width="35" Click="ButtonBackClick" >
+        <Button Background="Transparent" BorderThickness="0" Height="35" VerticalAlignment="Top" Margin="5 0 0  0" Name="buttonBack" HorizontalAlignment="Left" Width="35" Click="ButtonBackClick">
             <Button.ToolTip>
                 <ToolTip>
                     <TextBlock Text="Назад"/>
