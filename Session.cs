@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Authorization
+namespace ControlStudy
 {
     using System;
     using System.Collections.Generic;

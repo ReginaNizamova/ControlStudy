@@ -7,20 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Authorization
+namespace ControlStudy
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class User
     {
-
         public int IdUser { get; set; }
         public string LoginUser { get; set; }
         public string Password { get; set; }
         public int IdRole { get; set; }
         public int IdPerson { get; set; }
-
+    
         public virtual Person Person { get; set; }
         public virtual Role Role { get; set; }
     }

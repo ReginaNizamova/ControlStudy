@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
-using Authorization;
+using ControlStudy;
 
 namespace ControlStudy
 {

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Authorization.Pages
+namespace ControlStudy.Pages
 {
     public partial class AdminPage : Page
     {

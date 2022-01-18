@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Authorization
+namespace ControlStudy
 {
     public partial class AddEditGradeWindow : Window
     {
@@ -21,7 +21,7 @@ namespace Authorization
             DataContext = _currentProgress;
             comboBoxGroup.ItemsSource = ControlStudyEntities.GetContext().Groups.ToList();
             comboBoxDiscipline.ItemsSource = ControlStudyEntities.GetContext().Disciplines.ToList();
-            _dataGrid = dataGridAdmin;
+           _dataGrid = dataGridAdmin;
         }
 
         private void AddEditGradeClick(object sender, RoutedEventArgs e) //Добавление/изменение пользователя

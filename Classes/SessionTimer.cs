@@ -1,4 +1,4 @@
-﻿using Authorization;
+﻿using ControlStudy;
 using System;
 using System.Linq;
 using Timer = System.Timers.Timer;

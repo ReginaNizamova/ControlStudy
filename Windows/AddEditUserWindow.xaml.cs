@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Authorization
+namespace ControlStudy
 {
     public partial class AddEditUserWindow : Window
     {
