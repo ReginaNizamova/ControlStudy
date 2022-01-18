@@ -18,9 +18,9 @@ namespace ControlStudy
 
             List<Progress> progresses = new List<Progress>();
 
-            var query = ControlStudyEntities.GetContext().Users.Where(p => p.LoginUser == loginNowUser).Select(p => p.IdPerson).FirstOrDefault();
+            var idPerson = ControlStudyEntities.GetContext().Users.Where(p => p.LoginUser == loginNowUser).Select(p => p.IdPerson).FirstOrDefault();
 
-            progresses = ControlStudyEntities.GetContext().Progresses.Where(p => p.IdPerson == query).ToList();
+            progresses = ControlStudyEntities.GetContext().Progresses.Where(p => p.IdPerson == idPerson).ToList();
 
             dataGridProgress.Items.Clear();
             dataGridProgress.ItemsSource = progresses;

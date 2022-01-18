@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Authorization"
         mc:Ignorable="d"
-        Title="Добавить оценку" WindowStartupLocation="CenterScreen" Closed="WindowClosed" Height="300" Width="500" MaxHeight="300" MaxWidth="500" MinHeight="300" MinWidth="500" Background="#031745">
+        Title="Добавить оценку" Icon="/Resource/icon.ico" WindowStartupLocation="CenterScreen" Closed="WindowClosed" Height="300" Width="500" MaxHeight="300" MaxWidth="500" MinHeight="300" MinWidth="500" Background="#031745">
     <Grid>
         <Viewbox Stretch="Uniform"  MaxHeight="170">
             <StackPanel Orientation="Horizontal">
