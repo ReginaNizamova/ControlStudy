@@ -32,7 +32,8 @@ namespace ControlStudy
         {
             StringBuilder errors = new StringBuilder();
 
-            if (string.IsNullOrWhiteSpace(_currentUser.Person.Family) || string.IsNullOrWhiteSpace(_currentUser.Person.Name) || string.IsNullOrWhiteSpace(_currentUser.Person.Patronimic))
+            if (string.IsNullOrWhiteSpace(_currentUser.Person.Family) || string.IsNullOrWhiteSpace(_currentUser.Person.Name) 
+                || string.IsNullOrWhiteSpace(_currentUser.Person.Patronimic))
                 errors.AppendLine("ФИО");
             if (_currentUser.Role == null)
                 errors.AppendLine("Роль");

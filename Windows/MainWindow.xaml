@@ -13,7 +13,7 @@
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Background" Value="Azure"/>
         </Style>
-        <x:Array x:Key="Images" Type="ImageSource">
+        <x:Array x:Key="images" Type="ImageSource">
             <BitmapImage UriSource="/Resource/Background/01.jpg"/>
             <BitmapImage UriSource="/Resource/Background/02.jpg"/>
             <BitmapImage UriSource="/Resource/Background/03.jpg"/>

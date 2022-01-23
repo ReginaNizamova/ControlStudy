@@ -9,7 +9,7 @@ namespace ControlStudy
 {
     public partial class StudentPage : Page
     {
-        readonly SessionTimer Timer = new SessionTimer(); //Dключение таймера
+        readonly SessionTimer Timer = new SessionTimer(); //Включение таймера
 
         public StudentPage(string loginNowUser)
         {
