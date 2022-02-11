@@ -65,7 +65,7 @@
                     </Canvas>
 
                     <Canvas Margin="0 30 0 30">
-                        <TextBox x:Name="gradeText" ToolTip="Цифры от 2 до 5" PreviewTextInput="GradePreviewTextInput" Text="{Binding Grade}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150"/>
+                        <TextBox x:Name="gradeText" ToolTip="Цифры от 2 до 5"  Text="{Binding Grade}" FontFamily="Comic Sans MS" Style="{StaticResource textBox}" Width="150"/>
                         <TextBlock IsHitTestVisible="False" FontFamily="Comic Sans MS" Text="оценка" Foreground="DarkGray" FontSize="16">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">

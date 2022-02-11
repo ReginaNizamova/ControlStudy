@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -35,8 +36,9 @@ namespace ControlStudy
                 errors.AppendLine("Дисциплина");
             if (comboBoxGroup.Text == "")
                 errors.AppendLine("Группа");
-            if (string.IsNullOrWhiteSpace(Convert.ToString(_currentProgress.Grade)))
-                errors.AppendLine("Оценка");
+            if (CheckGrade(gradeText.Text) == false)
+               errors.AppendLine("Введите оценку");
+
 
             if (errors.Length > 0)
             {
@@ -44,8 +46,10 @@ namespace ControlStudy
                 return;
             }
 
+            int idPerson = ControlStudyEntities.GetContext().People.Where(c => c.Family == comboBoxPerson.Text).Select(c => c.IdPerson).FirstOrDefault();
+
             _currentProgress.DateGrade = DateTime.Today;
-            _currentProgress.IdPerson = Convert.ToInt32(idStudent.Text);
+            _currentProgress.IdPerson = idPerson;
             
 
             if (_currentProgress.IdProgress == 0)
@@ -119,9 +123,30 @@ namespace ControlStudy
             }    
         }
 
-        private void GradePreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e) //Разрешает ввод в textbox оценки только цифры от 2 до 5
-        {
-            e.Handled = "2345".IndexOf(e.Text) < 0;
+        public static bool CheckGrade (string grade)
+        {   
+            var minMaxChar = new Regex(@"^(?=.{1}$)");
+            var number = new Regex(@"[2-5]+");  
+            var upperChar = new Regex(@"[A-Z]");
+            var lowerChar = new Regex(@"[a-z]");
+            var symbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+
+            if (lowerChar.IsMatch(grade))
+                return false;
+
+            else if (upperChar.IsMatch(grade))
+                return false;
+
+            else if (!minMaxChar.IsMatch(grade))
+                return false;
+
+            else if (!number.IsMatch(grade))
+                return false;
+
+            else if (symbols.IsMatch(grade))
+                return false;
+
+            return true;
         }
     }
 }

@@ -44,9 +44,12 @@ namespace ControlStudy
             if (string.IsNullOrWhiteSpace(_currentUser.Password))
                 errors.AppendLine("Пароль");
 
-            if (CheckPass() == false)
+            if (CheckPass(passwordPersonText.Text) == false)
                 errors.AppendLine("В пароле использованы не все необходимые знаки");
-            
+
+            if (CheckFamily(familyText.Text, nameText.Text, patronimicText.Text) == false)
+                errors.AppendLine("Введите корректное ФИО");
+
 
             if (errors.Length > 0)
             {
@@ -68,10 +71,8 @@ namespace ControlStudy
             }
         }
 
-        private bool CheckPass() // Проверка пароля
+        public static bool CheckPass(string input) // Проверка пароля
         {
-            var input = passwordPersonText.Text;
-
             var minMaxChar = new Regex(@".{8}");
             var number = new Regex(@"[0-9]+");
             var upperChar = new Regex(@"[A-Z]");
@@ -93,9 +94,53 @@ namespace ControlStudy
             else if (!symbols.IsMatch(input))
                 return false;
 
-            else
                 return true;
+        }
 
+        public static bool CheckFamily(string family, string name, string patronimic) // Проверка ФИО
+        {
+            var minMaxChar = new Regex(@".{2}");
+            var number = new Regex(@"[0-9]+");
+            var upperChar = new Regex(@"[А-Я]");
+            var lowerChar = new Regex(@"[а-я]");
+            var symbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+
+            if (!lowerChar.IsMatch(family))
+                return false;
+            else if (!lowerChar.IsMatch(name))
+                return false;
+            else if (!lowerChar.IsMatch(patronimic))
+                return false;
+
+            else if (!upperChar.IsMatch(family))
+                return false;
+            else if (!upperChar.IsMatch(name))
+                return false;
+            else if (!upperChar.IsMatch(patronimic))
+                return false;
+
+            else if (!minMaxChar.IsMatch(family))
+                return false;
+            else if (!minMaxChar.IsMatch(name))
+                return false;
+            else if (!minMaxChar.IsMatch(patronimic))
+                return false;
+
+            else if (number.IsMatch(family))
+                return false;
+            else if (number.IsMatch(name))
+                return false;
+            else if (number.IsMatch(patronimic))
+                return false;
+
+            else if (symbols.IsMatch(family))
+                return false;
+            else if (symbols.IsMatch(name))
+                return false;
+            else if (symbols.IsMatch(patronimic))
+                return false;
+
+            return true;
         }
 
         private void WindowClosed(object sender, EventArgs e)//Обновляет DataGrid 

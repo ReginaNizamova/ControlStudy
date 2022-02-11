@@ -30,13 +30,13 @@ namespace ControlStudy.Pages
 
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
-            var userDelete = dataGridAdmin.SelectedItems.Cast<Person>().ToList();
+            var userDelete = dataGridAdmin.SelectedItems.Cast<User>().ToList();
           
             if (MessageBox.Show($"Удалить следующие {userDelete.Count()} элементы?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question)==MessageBoxResult.Yes)
             {
                 try
                 {
-                    ControlStudyEntities.GetContext().People.RemoveRange(userDelete);
+                    ControlStudyEntities.GetContext().Users.RemoveRange(userDelete);
                     ControlStudyEntities.GetContext().SaveChanges();
                     MessageBox.Show("Данные удалены!");
 
