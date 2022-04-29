@@ -101,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Dates.cs" />
+    <Compile Include="Pages\TeacherPage.xaml.cs">
+      <DependentUpon>TeacherPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddEditGradeWindow.xaml.cs">
       <DependentUpon>AddEditGradeWindow.xaml</DependentUpon>
     </Compile>
@@ -141,8 +145,8 @@
     <Compile Include="Pages\StudentPage.xaml.cs">
       <DependentUpon>StudentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TeacherPage.xaml.cs">
-      <DependentUpon>TeacherPage.xaml</DependentUpon>
+    <Compile Include="Pages\TeacherJournalPage.xaml.cs">
+      <DependentUpon>TeacherJournalPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AdminUsersPage.xaml.cs">
       <DependentUpon>AdminUsersPage.xaml</DependentUpon>
@@ -163,6 +167,10 @@
     <Compile Include="User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Page Include="Pages\TeacherPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AddEditGradeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,7 +207,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\TeacherPage.xaml">
+    <Page Include="Pages\TeacherJournalPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -275,6 +283,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resource\report.png" />
     <Resource Include="Resource\icon.ico" />
     <Resource Include="Resource\Background\04.jpg" />
     <Resource Include="Resource\Background\05.jpg" />

@@ -9,8 +9,8 @@ namespace ControlStudy
 {
     public partial class AddEditGradeWindow : Window
     {
-        private Progress _currentProgress = new Progress();
-        private DataGrid _dataGrid;
+        private readonly Progress _currentProgress = new Progress();
+        private readonly DataGrid _dataGrid;
 
         public AddEditGradeWindow(Progress selectedProgress, DataGrid dataGridAdmin)
         {

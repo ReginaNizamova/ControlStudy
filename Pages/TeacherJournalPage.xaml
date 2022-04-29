@@ -1,0 +1,133 @@
+﻿<Page x:Class="ControlStudy.TeacherJournalPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+      xmlns:local="clr-namespace:ControlStudy"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TeacherJournalPage">
+
+    <Page.Resources>
+        <!--<Style TargetType="TextBox" x:Key="textBox">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Background" Value="Azure"/>
+        </Style>-->
+        <!--<Style TargetType="Button" x:Key="button">
+            <Setter Property="Width" Value="52"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="FontSize" Value="11"/>
+        </Style>-->
+
+    </Page.Resources>
+
+  
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan="2" Background="Black" Opacity="0.5"/>
+        
+        <Viewbox Stretch="Uniform" Margin="10" MaxWidth="950" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Группа" FontSize="12" Margin="10 0 20 0" Foreground="White" VerticalAlignment="Center"/>
+                <ComboBox x:Name="groupCB" Margin="0 0 40 0" SelectionChanged="GroupCBSelectionChanged" DisplayMemberPath="Group1" Height="22" Width="120" FontSize="12"/>
+
+                <TextBlock Text="Предмет" FontSize="12" VerticalAlignment="Center" Foreground="White"  Margin="0 0 20 0"/>
+                <ComboBox x:Name="disciplineCB" Margin="0 0 40 0" DisplayMemberPath="Discipline1" Width="120" Height="22"  FontSize="12"/>
+
+                <TextBlock Text="C" FontSize="12" Margin="0 0 10 0" VerticalAlignment="Center" Foreground="White" />
+                <DatePicker  x:Name="datePickerStart" Margin="0 0 30 0" FontSize="12" DisplayDateStart="{Binding StartDate}" VerticalAlignment="Center"/>
+
+                <TextBlock Text="Даты по" FontSize="12" VerticalAlignment="Center" Margin="0 0 10 0" Foreground="White" />
+                <DatePicker x:Name="datePickerEnd" SelectedDateChanged="DatePickerEndSelectedDateChanged" Text="{Binding EndDate}" VerticalAlignment="Center" FontSize="12" DisplayDateEnd="{Binding EndDate}"/>
+            </StackPanel>
+        </Viewbox>
+
+        <ListView x:Name="studentsLV" Grid.Row="1" Margin="10" FontSize="12">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Фамилия" Width="120" DisplayMemberBinding="{Binding Family}"/>
+                    <GridViewColumn Header="Имя" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ShowGridLines="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ScrollViewer Grid.Column="1" Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <ListView x:Name="gradesLV"  Margin="10" MouseDoubleClick="GradesLVMouseDoubleClick" FontSize="12">
+                <ListView.View>
+                    <GridView x:Name="gridView"/>
+                </ListView.View>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ShowGridLines="True">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+       
+        <!--<DataGrid BorderThickness="0" ColumnWidth="*" IsReadOnly="True"  AutoGenerateColumns="False" Margin="25" x:Name="dataGridProgress" FontSize="15" Opacity="0.85" Background="Azure"  AlternatingRowBackground="#9ACeeb" AlternationCount="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Группа" Binding="{Binding Person.Group.Group1}" Width="*"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Person.Family}" Width="1.5*"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Person.Name}" Width="1.5*"/>
+                <DataGridTextColumn Header="Дисциплина" Binding="{Binding Discipline.Discipline1}" Width="2*"/>
+                <DataGridTextColumn Header="Оценка" Binding="{Binding Grade}" Width="*"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding DateGrade.Date, StringFormat=dd.MM.yyyy}" Width="2*"/>
+                <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="100" BorderThickness="0" Background="Transparent" FontSize="14" Content="Редактировать" x:Name="edit" Click="EditClick"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#9ACeeb"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Height" Value="30"/>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>-->
+
+        <!--<Border Grid.Row="1" Background="Black" Opacity="0.5"/>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal">
+            <Button x:Name="add" Click="AddClick" BorderThickness="0"  Width="50" Background="Transparent">
+                <Image Source="/Resource/addGrade.png"/>
+            </Button>
+
+            <Button x:Name="delete" Click="DeleteClick" BorderThickness="0" Margin="80 0 80 0" Width="60" Background="Transparent">
+                <Image Source="/Resource/deleteGrade.png"/>
+            </Button>
+
+            <Button x:Name="print" Click="PrintClick" BorderThickness="0" Width="60" Background="Transparent">
+                <Image Source="/Resource/print.png"/>
+            </Button>
+        </StackPanel>-->
+    </Grid>
+</Page>
